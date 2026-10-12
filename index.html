@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10101a">
+<title>VibeLoop - Your Vibe, Your World</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10101a;color:#f6f4ff;font-family:Arial,sans-serif}
+header{padding:20px 16px;border-bottom:1px solid #29283a;position:sticky;top:0;background:#10101a}
+.logo{font-size:25px;font-weight:800;color:#b8a0ff}
+header p{color:#aaa6bd;margin:6px 0 0;font-size:13px}
+main{max-width:600px;margin:auto;padding:16px}
+h2{font-size:21px}
+.card{background:#1b1a29;border:1px solid #302e44;border-radius:18px;padding:16px;margin:14px 0}
+input,textarea{width:100%;padding:13px;border:1px solid #403c56;border-radius:12px;background:#11111c;color:white;font-size:15px;margin:8px 0}
+button{border:0;border-radius:12px;padding:11px 15px;background:#9b7aff;color:#171027;font-weight:bold;font-size:14px;cursor:pointer}
+button:active{opacity:.8}
+.muted{color:#a9a5bc;font-size:13px}
+.posthead{display:flex;justify-content:space-between;align-items:center}
+.avatar{background:#38304f;border-radius:50%;padding:10px;margin-right:8px}
+.posttext{line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.actions button{background:#302b46;color:white}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#191826;border-top:1px solid #302e44;padding:10px 2px calc(10px + env(safe-area-inset-bottom))}
+nav button{background:transparent;color:#c8c3dc;padding:9px 8px}
+nav button.active{color:#b8a0ff}
+.page{padding-bottom:75px}
+.challenge{background:linear-gradient(135deg,#302052,#1c344a);border-radius:18px;padding:18px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">✦ VibeLoop</div>
+  <p>Your Vibe, Your World.</p>
+</header>
+
+<main class="page">
+<section id="home">
+  <div class="challenge">
+    <p>⚡ DAILY CHALLENGE</p>
+    <h2>Show Your Creativity!</h2>
+    <p class="muted">Share an idea, a goal or something you love.</p>
+    <button onclick="go('create')">Join the challenge →</button>
+  </div>
+  <h2>Your community feed</h2>
+  <div class="card">
+    <p>👋 Welcome to VibeLoop!</p>
+    <p class="muted">Be kind. Be creative. Be yourself.</p>
+  </div>
+  <div id="feed"></div>
+</section>
+
+<section id="explore" class="hidden">
+  <h2>Explore ✨</h2>
+  <div class="card">
+    <h3>🎨 Creativity</h3><p class="muted">Ideas, art and inspiration.</p>
+  </div>
+  <div class="card">
+    <h3>🎮 Gaming</h3><p class="muted">Gaming moments and tips.</p>
+  </div>
+  <div class="card">
+    <h3>📚 Study Zone</h3><p class="muted">Study goals and useful tricks.</p>
+  </div>
+  <div class="card">
+    <h3>😂 Fun & Comedy</h3><p class="muted">Make your community smile.</p>
+  </div>
+</section>
+
+<section id="create" class="hidden">
+  <h2>Create a post ✍️</h2>
+  <div class="card">
+    <label for="username">Your display name</label>
+    <input id="username" maxlength="30" placeholder="Enter a nickname">
+    <label for="message">What's your vibe today?</label>
+    <textarea id="message" maxlength="500" rows="5" placeholder="Share something positive..."></textarea>
+    <button onclick="publish()">Publish post</button>
+    <p class="muted">Please don't share private information.</p>
+  </div>
+</section>
+
+<section id="profile" class="hidden">
+  <h2>Your profile 👤</h2>
+  <div class="card">
+    <div style="font-size:42px">🪩</div>
+    <h3 id="profileName">Vibe Creator</h3>
+    <p class="muted">A new voice in the VibeLoop community.</p>
+    <p>Posts: <b id="postCount">0</b></p>
+    <button onclick="go('create')">Create a post</button>
+  </div>
+</section>
+</main>
+
+<nav>
+  <button class="active" data-page="home" onclick="go('home')">⌂ Home</button>
+  <button data-page="explore" onclick="go('explore')">⌕ Explore</button>
+  <button data-page="create" onclick="go('create')">＋ Create</button>
+  <button data-page="profile" onclick="go('profile')">♙ Profile</button>
+</nav>
+
+<script>
+let posts=[];
+try {
+  posts=JSON.parse(localStorage.getItem('vibeloop_posts')||'[]');
+  if(!Array.isArray(posts)) posts=[];
+} catch(e) { posts=[]; }
+
+function go(page){
+  document.querySelectorAll('main section').forEach(s=>{
+    s.classList.toggle('hidden',s.id!==page);
+  });
+  document.querySelectorAll('nav button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.page===page);
+  });
+  if(page==='profile') updateProfile();
+  window.scrollTo(0,0);
+}
+
+function save(){
+  try{
+    localStorage.setItem('vibeloop_posts',JSON.stringify(posts));
+  }catch(e){
+    alert('Browser storage is full. Try removing some posts.');
+  }
+}
+
+function publish(){
+  const name=document.getElementById('username').value.trim();
+  const message=document.getElementById('message').value.trim();
+  if(!name||!message){
+    alert('Please enter a nickname and a post.');
+    return;
+  }
+  posts.unshift({
+    id:Date.now(),name,message,likes:0,liked:false
+  });
+  save();
+  document.getElementById('message').value='';
+  document.getElementById('profileName').textContent=name;
+  render();
+  go('home');
+}
+
+function likePost(id){
+  const post=posts.find(p=>p.id===id);
+  if(!post)return;
+  post.liked=!post.liked;
+  post.likes=Math.max(0,post.likes+(post.liked?1:-1));
+  save();
+  render();
+}
+
+function render(){
+  const feed=document.getElementById('feed');
+  feed.replaceChildren();
+  posts.forEach(p=>{
+    const card=document.createElement('article');
+    card.className='card';
+    const head=document.createElement('div');
+    head.className='posthead';
+    const author=document.createElement('strong');
+    author.textContent='🟣 '+p.name;
+    const tag=document.createElement('span');
+    tag.className='muted';
+    tag.textContent='#VibeLoop';
+    head.append(author,tag);
+    const text=document.createElement('p');
+    text.className='posttext';
+    text.textContent=p.message;
+    const actions=document.createElement('div');
+    actions.className='actions';
+    const like=document.createElement('button');
+    like.textContent=(p.liked?'💜':'♡')+' '+p.likes+' Likes';
+    like.onclick=()=>likePost(p.id);
+    actions.append(like);
+    card.append(head,text,actions);
+    feed.append(card);
+  });
+  updateProfile();
+}
+
+function updateProfile(){
+  document.getElementById('postCount').textContent=posts.length;
+}
+render();
+</script>
+</body>
+  </html>
+                
