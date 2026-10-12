@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>VibeLoop — Your world. Your vibe.</title>
+<style>
+:root{--ink:#171721;--muted:#777786;--line:#ececf2;--soft:#f7f7fb;--violet:#6d5ce8;--violet2:#f0edff;--white:#fff;--shadow:0 12px 35px rgba(34,28,80,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fafafe;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c9c0ff;outline-offset:2px}
+.app{max-width:1180px;margin:auto;min-height:100vh}.topbar{height:76px;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.7px;font-size:23px}.brand-mark{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#897aff,#5b49d9);display:grid;place-items:center;color:white;font-size:24px;box-shadow:0 7px 16px #6d5ce833}.brand span:last-child{color:var(--violet)}
+.search{width:min(42%,390px);height:42px;border:1px solid var(--line);background:#f8f8fc;border-radius:15px;display:flex;align-items:center;gap:9px;padding:0 13px}.search input{border:0;outline:0;background:transparent;width:100%;font-size:14px;color:var(--ink)}
+.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:#fff;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:18px;color:#44445a}.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#eee9ff,#c9bfff);display:grid;place-items:center;color:#5745bf;font-weight:800;border:2px solid white;box-shadow:0 0 0 1px var(--line)}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr) 250px;gap:22px;padding:24px}.sidebar,.rightbar{position:sticky;top:98px;align-self:start}.nav-card,.panel,.composer,.post,.welcome{background:white;border:1px solid var(--line);border-radius:22px;box-shadow:0 3px 14px #22203304}.nav-card{padding:12px}.nav-item{width:100%;display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:13px 14px;border-radius:14px;text-align:left;color:#686879;font-weight:650;margin:2px 0}.nav-item .ico{font-size:20px;width:25px;text-align:center}.nav-item.active{background:var(--violet2);color:var(--violet)}.nav-item:hover{background:#f6f4ff}.side-note{font-size:12px;color:var(--muted);line-height:1.6;padding:17px 10px}.side-note strong{color:var(--ink)}
+main{min-width:0}.welcome{padding:22px 22px 20px;margin-bottom:18px;background:linear-gradient(120deg,#fff 25%,#f4f1ff 100%);position:relative;overflow:hidden}.welcome:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;border:26px solid #dcd5ff66;right:-42px;top:-65px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.7px;color:var(--violet);font-weight:800}.welcome h1{font-size:clamp(24px,3vw,34px);letter-spacing:-1.3px;margin:8px 0}.welcome p{color:var(--muted);font-size:14px;margin:0 0 16px}.primary{border:0;background:var(--violet);color:white;padding:11px 16px;border-radius:13px;font-weight:750;box-shadow:0 7px 15px #6d5ce82b}.primary:hover{background:#5947d5}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:12px;font-weight:650}
+.section-heading{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 12px}.section-heading h2{font-size:17px;letter-spacing:-.3px;margin:0}.subtle{font-size:12px;color:var(--muted)}
+.stories{display:flex;gap:14px;overflow-x:auto;padding:3px 1px 12px}.story{flex:0 0 68px;border:0;background:transparent;padding:0;text-align:center;color:var(--muted);font-size:11px}.story-ring{width:61px;height:61px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#a497ff,#6d5ce8,#f5a7d6);margin:0 auto 6px}.story-inner{height:100%;width:100%;border:3px solid white;border-radius:50%;background:#f0edff;display:grid;place-items:center;font-size:24px}.story.add .story-ring{background:#fff;border:1.5px dashed #bdb4ff;padding:3px}.story.add .story-inner{color:var(--violet);font-size:25px}
+.composer{padding:15px;margin-bottom:17px}.compose-top{display:flex;gap:11px;align-items:center}.compose-input{border:1px solid var(--line);background:#fafafe;border-radius:14px;padding:12px 14px;text-align:left;color:#9999a8;flex:1}.compose-actions{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 0 50px}.mini-action{border:1px solid var(--line);background:white;border-radius:11px;padding:8px 10px;font-size:12px;color:#686879}.mini-action:hover{background:var(--violet2);color:var(--violet)}
+.post{padding:17px;margin-bottom:16px}.post-head{display:flex;align-items:center;gap:10px}.post-author{flex:1;min-width:0}.post-author strong{font-size:13px}.post-author small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.dots{border:0;background:transparent;color:var(--muted);font-size:22px}.post-text{font-size:14px;line-height:1.65;margin:14px 0;color:#343443;overflow-wrap:anywhere}.post-art{min-height:180px;border-radius:17px;display:grid;place-items:center;text-align:center;padding:22px;background:linear-gradient(135deg,#f0edff,#e8f7ff);color:#5846c8;overflow:hidden}.post-art .art-emoji{font-size:52px;display:block;margin-bottom:9px}.post-art strong{font-size:20px;letter-spacing:-.5px}.post-art small{display:block;color:#7769c7;margin-top:5px}.post-art.peach{background:linear-gradient(135deg,#fff0e9,#ffe0ed);color:#a64d70}.post-art.mint{background:linear-gradient(135deg,#e5fbf3,#e4f1ff);color:#277d70}.post-actions{display:flex;align-items:center;gap:16px;padding-top:13px}.post-action{border:0;background:transparent;padding:4px 0;color:#727283;font-size:13px;display:flex;align-items:center;gap:6px}.post-action.liked{color:#e34f82}.post-action.saved{color:var(--violet)}.post-action span{font-size:17px}.post-action:last-child{margin-left:auto}.comments{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;display:none}.comments.show{display:block}.comment-list{font-size:12px;color:#555567;line-height:1.7}.comment-form{display:flex;gap:8px;margin-top:9px}.comment-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:9px;font-size:12px}.comment-form button{border:0;background:var(--violet2);color:var(--violet);border-radius:10px;padding:8px 11px;font-weight:700}
+.panel{padding:17px;margin-bottom:15px}.panel-title{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:800;margin-bottom:14px}.trend{display:flex;gap:10px;align-items:center;margin:13px 0}.trend-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:#f0edff;font-size:18px}.trend strong{font-size:12px;display:block}.trend small{font-size:11px;color:var(--muted)}.person{display:flex;align-items:center;gap:9px;margin:14px 0}.person .person-info{flex:1;min-width:0}.person strong{display:block;font-size:12px}.person small{font-size:10px;color:var(--muted)}.follow{border:1px solid #d9d2ff;background:#f7f5ff;color:var(--violet);border-radius:10px;padding:7px 9px;font-size:11px;font-weight:750}.follow.following{background:var(--violet);color:#fff}
+
+.floating-create{display:none}
+@media(max-width:650px){
+.floating-create{display:grid;place-items:center;position:fixed;right:19px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:25;width:57px;height:57px;border:3px solid #fff;border-radius:20px;background:linear-gradient(145deg,#8b7aff,#5b49d9);color:#fff;font-size:34px;line-height:1;box-shadow:0 8px 22px #6d5ce866,0 0 0 5px #eeeaffaa;transition:transform .18s ease,box-shadow .18s ease}
+.floating-create:active{transform:scale(.94);box-shadow:0 4px 12px #6d5ce855}
+.bottom-nav{padding-right:72px}
+}
+
+.bottom-nav{display:none}
+.view{display:none}.view.active{display:block}.empty{padding:36px 20px;text-align:center;background:white;border:1px solid var(--line);border-radius:20px;color:var(--muted)}.empty .big{font-size:36px}.empty h3{color:var(--ink);margin:10px 0 5px}.empty p{font-size:13px}
+.reel-card{background:#181722;border-radius:22px;min-height:330px;display:flex;align-items:end;padding:22px;color:#fff;position:relative;overflow:hidden;margin-bottom:15px}.reel-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#9a8cff 0,#5946a5 23%,#26223f 58%,#171722 100%)}.reel-card.peach:before{background:radial-gradient(circle at 50% 25%,#ffc1b6,#a64e81 35%,#261b36 78%)}.reel-card.mint:before{background:radial-gradient(circle at 50% 25%,#9af2d5,#278c94 35%,#172333 78%)}.reel-center{position:absolute;top:25%;left:0;right:0;text-align:center;font-size:68px;filter:drop-shadow(0 5px 12px #0003)}.reel-copy{position:relative;z-index:1}.reel-copy strong{font-size:16px}.reel-copy p{font-size:12px;color:#e7e5f1;margin:5px 0 0}.chat-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.chat-row:last-child{border-bottom:0}.chat-meta{flex:1;min-width:0}.chat-meta strong{font-size:13px}.chat-meta p{font-size:12px;color:var(--muted);margin:4px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-row button{border:0;background:var(--violet2);color:var(--violet);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:700}
+.profile-hero{text-align:center;padding:25px;background:linear-gradient(135deg,#f3f0ff,#fff);border:1px solid var(--line);border-radius:22px}.profile-avatar{width:76px;height:76px;border-radius:27px;background:linear-gradient(135deg,#d9d1ff,#a99aff);display:grid;place-items:center;font-size:35px;margin:0 auto 12px}.profile-hero h2{margin:0;font-size:21px}.profile-hero p{font-size:12px;color:var(--muted)}.stats{display:flex;justify-content:center;gap:26px;margin:17px 0}.stats strong{display:block;font-size:16px}.stats small{color:var(--muted);font-size:11px}.profile-actions{display:flex;justify-content:center;gap:8px}.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px}.profile-tile{aspect-ratio:1;border-radius:13px;display:grid;place-items:center;font-size:32px;background:linear-gradient(135deg,#f0edff,#e3f7ff)}.profile-tile:nth-child(3n+2){background:linear-gradient(135deg,#fff0e9,#ffe0ed)}.profile-tile:nth-child(3n){background:linear-gradient(135deg,#e5fbf3,#e4f1ff)}
+.modal-backdrop{position:fixed;inset:0;background:#17172166;display:none;align-items:center;justify-content:center;padding:18px;z-index:30}.modal-backdrop.open{display:flex}.modal{background:white;width:min(100%,480px);border-radius:24px;padding:22px;box-shadow:0 24px 80px #17172133}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-head h2{font-size:20px;margin:0}.close{border:0;background:#f5f5fa;border-radius:10px;width:36px;height:36px;font-size:19px}.field{display:block;margin:13px 0}.field span{display:block;font-size:12px;font-weight:750;margin-bottom:7px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;resize:vertical}.field textarea{min-height:90px}.modal-footer{display:flex;gap:9px;justify-content:flex-end;margin-top:16px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#211f32;color:#fff;padding:12px 17px;border-radius:13px;font-size:13px;box-shadow:var(--shadow);z-index:50;display:none;max-width:90vw}.toast.show{display:block}
+.disclaimer{font-size:11px;color:var(--muted);line-height:1.55;margin:15px 3px}
+@media(max-width:950px){.layout{grid-template-columns:190px minmax(0,1fr);gap:16px;padding:17px}.rightbar{display:none}}
+@media(max-width:650px){.topbar{height:64px;padding:0 14px}.brand{font-size:20px}.brand-mark{width:35px;height:35px;border-radius:12px}.search{width:42%;height:38px}.search input{font-size:12px}.top-actions .icon-btn{display:none}.layout{display:block;padding:13px 12px 85px}.sidebar{display:none}main{max-width:520px;margin:auto}.welcome{padding:19px}.welcome h1{font-size:26px}.welcome:after{width:105px;height:105px;border-width:19px;right:-38px}.bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:8px 7px calc(8px + env(safe-area-inset-bottom));justify-content:space-around}.bottom-nav button{border:0;background:transparent;color:#858596;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:52px}.bottom-nav button span{font-size:21px}.bottom-nav button.active{color:var(--violet);font-weight:800}.topbar .avatar{width:35px;height:35px}.post{padding:14px}.post-art{min-height:165px}.compose-actions{margin-left:0}.stories{gap:10px}.story{flex-basis:61px}.story-ring{width:55px;height:55px}.section-heading{margin-top:17px}.reel-card{min-height:360px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">〰</div><div>Vibe<span>Loop</span></div></div>
+  <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Find your vibe..." aria-label="Search posts"></label>
+  <div class="top-actions"><button class="icon-btn" aria-label="Notifications" id="notifyBtn">♧</button><button class="avatar" id="topProfile" aria-label="Open profile">V</button></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <div class="nav-card" id="sideNav">
+    <button class="nav-item active" data-view="home"><span class="ico">⌂</span> Home</button>
+    <button class="nav-item" data-view="reels"><span class="ico">▣</span> Reels</button>
+    <button class="nav-item" data-view="explore"><span class="ico">⌕</span> Explore</button>
+    <button class="nav-item" data-view="chat"><span class="ico">◌</span> Messages</button>
+    <button class="nav-item" data-view="profile"><span class="ico">◎</span> My Profile</button>
+    <button class="nav-item" id="sidebarCreate"><span class="ico">＋</span> Create post</button>
+  </div>
+  <div class="side-note"><strong>VibeLoop</strong><br>Your world. Your vibe.<br><br>Made for moments worth sharing.</div>
+</aside>
+<main>
+<section class="view active" id="view-home">
+  <div class="welcome"><div class="eyebrow">A little more you</div><h1>Your world. Your vibe. ✨</h1><p>Find your people. Share your moments. Keep the good vibes looping.</p><button class="primary" id="welcomeCreate">＋ Create a post</button></div>
+  <div class="section-heading"><h2>Vibe circles</h2><span class="subtle">Little moments, big energy</span></div>
+  <div class="stories" id="stories">
+    <button class="story add" id="addStory"><div class="story-ring"><div class="story-inner">＋</div></div>Your vibe</button>
+    <button class="story" data-story="Mia"><div class="story-ring"><div class="story-inner">🌷</div></div>Mia</button>
+    <button class="story" data-story="Arjun"><div class="story-ring"><div class="story-inner">🏄</div></div>Arjun</button>
+    <button class="story" data-story="Zoya"><div class="story-ring"><div class="story-inner">🎨</div></div>Zoya</button>
+    <button class="story" data-story="Kabir"><div class="story-ring"><div class="story-inner">🎧</div></div>Kabir</button>
+    <button class="story" data-story="Ira"><div class="story-ring"><div class="story-inner">🌿</div></div>Ira</button>
+  </div>
+  <div class="composer"><div class="compose-top"><div class="avatar">V</div><button class="compose-input" id="composeOpen">What’s your vibe today?</button></div><div class="compose-actions"><button class="mini-action" id="photoCreate">▧ Photo post</button><button class="mini-action" id="thoughtCreate">✎ Thought</button><button class="mini-action" id="reelCreate">▷ Share a reel</button></div></div>
+  <div class="section-heading"><h2>Your feed</h2><span class="subtle" id="feedCount">Fresh vibes</span></div>
+  <div id="feedPosts"></div>
+</section>
+<section class="view" id="view-reels">
+  <div class="section-heading"><h2>Reels, on loop ✨</h2><span class="subtle">Quick moments</span></div>
+  <p class="subtle" style="margin:0 0 16px">A small dose of creativity, just for your vibe.</p>
+  <div id="reelsList"></div>
+  <button class="primary" id="reelUpload">＋ Create a reel post</button>
+</section>
+<section class="view" id="view-explore">
+  <div class="section-heading"><h2>Explore your vibe</h2><span class="subtle">Find something new</span></div>
+  <div class="welcome"><div class="eyebrow">Trending today</div><h1>Little things. Lovely vibes.</h1><p>Explore moments from the community.</p></div>
+  <div id="explorePosts"></div>
+</section>
+<section class="view" id="view-chat">
+  <div class="section-heading"><h2>Your conversations</h2><span class="subtle">Demo inbox</span></div>
+  <div class="panel" id="chatList">
+    <div class="chat-row"><div class="avatar">M</div><div class="chat-meta"><strong>Mia Kapoor</strong><p>That photo has such a good vibe ✨</p></div><button data-chat="Mia Kapoor">Open</button></div>
+    <div class="chat-row"><div class="avatar">A</div><div class="chat-meta"><strong>Arjun Mehta</strong><p>Sent you a little inspiration today</p></div><button data-chat="Arjun Mehta">Open</button></div>
+    <div class="chat-row"><div class="avatar">Z</div><div class="chat-meta"><strong>Zoya Khan</strong><p>Let's share some creative ideas!</p></div><button data-chat="Zoya Khan">Open</button></div>
+    <p class="disclaimer">These are sample conversations. Real private messaging needs a secure backend and user accounts.</p>
+  </div>
+</section>
+<section class="view" id="view-profile">
+  <div class="profile-hero"><div class="profile-avatar">🌙</div><h2 id="profileName">Vibe Explorer</h2><p id="profileHandle">@yourvibe · finding my own loop</p><div class="stats"><div><strong id="profilePostCount">0</strong><small>Posts</small></div><div><strong>128</strong><small>Followers*</small></div><div><strong>96</strong><small>Following*</small></div></div><div class="profile-actions"><button class="primary" id="editProfile">Edit profile</button><button class="secondary" id="shareProfile">Share profile</button></div><p class="disclaimer">*Sample counts in this preview.</p></div>
+  <div class="section-heading"><h2>Your moments</h2><span class="subtle">Your personal corner</span></div><div class="profile-grid" id="profileGrid"></div>
+</section>
+</main>
+<aside class="rightbar">
+  <div class="panel"><div class="panel-title">Trending vibes <span style="color:var(--violet)">↗</span></div>
+    <div class="trend"><div class="trend-icon">☁️</div><div><strong>#SlowMornings</strong><small>2.4k moments</small></div></div>
+    <div class="trend"><div class="trend-icon">🎨</div><div><strong>#MadeByMe</strong><small>1.8k moments</small></div></div>
+    <div class="trend"><div class="trend-icon">🌱</div><div><strong>#SmallWins</strong><small>956 moments</small></div></div>
+    <div class="trend"><div class="trend-icon">📸</div><div><strong>#LittleDetails</strong><small>740 moments</small></div></div>
+  </div>
+  <div class="panel"><div class="panel-title">People to vibe with <span style="color:var(--violet)">···</span></div>
+    <div class="person"><div class="avatar">M</div><div class="person-info"><strong>Mia Kapoor</strong><small>@miamakes</small></div><button class="follow">Follow</button></div>
+    <div class="person"><div class="avatar">A</div><div class="person-info"><strong>Arjun Mehta</strong><small>@arjun.outdoors</small></div><button class="follow">Follow</button></div>
+    <div class="person"><div class="avatar">Z</div><div class="person-info"><strong>Zoya Khan</strong><small>@zoyasketches</small></div><button class="follow">Follow</button></div>
+  </div>
+  <p class="disclaimer">Preview mode · Your posts are saved only in this browser. Sign-in and multi-user features come in the backend setup.</p>
+</aside>
+</div>
+<nav class="bottom-nav" id="bottomNav">
+  <button class="active" data-view="home"><span>⌂</span>Home</button>
+  <button data-view="reels"><span>▣</span>Reels</button>
+  <button data-view="chat"><span>◌</span>Messages</button>
+  <button data-view="explore"><span>⌕</span>Explore</button>
+  <button data-view="profile"><span>◎</span>Profile</button>
+</nav>
+<button class="floating-create" id="mobileCreate" aria-label="Create a post" title="Create a post">＋</button>
+</div>
+<div class="modal-backdrop" id="postModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><div class="modal-head"><h2 id="modalTitle">Share your vibe</h2><button class="close" id="closeModal" aria-label="Close">×</button></div>
+    <label class="field"><span>Post caption</span><textarea id="postCaption" maxlength="500" placeholder="What would you like to share?"></textarea></label>
+    <label class="field"><span>Choose a vibe</span><select id="postMood" style="width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff"><option value="lavender">Dreamy lavender ✨</option><option value="peach">Soft peach 🌸</option><option value="mint">Fresh mint 🌿</option></select></label>
+    <label class="field"><span>Emoji / visual (optional)</span><input id="postEmoji" maxlength="8" placeholder="e.g. 🌅"></label>
+    <div class="modal-footer"><button class="secondary" id="cancelPost">Cancel</button><button class="primary" id="publishPost">Share post</button></div>
+    <p class="disclaimer">This prototype creates a local post. It is not uploaded to a public server yet.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+  <div class="modal"><div class="modal-head"><h2 id="editTitle">Make it yours</h2><button class="close" id="closeEdit" aria-label="Close">×</button></div>
+    <label class="field"><span>Display name</span><input id="nameInput" maxlength="40" placeholder="Your name"></label>
+    <label class="field"><span>Profile handle</span><input id="handleInput" maxlength="24" placeholder="yourvibe"></label>
+    <div class="modal-footer"><button class="secondary" id="cancelEdit">Cancel</button><button class="primary" id="saveProfile">Save changes</button></div>
+  </div>
+</div>
+<div class="modal-backdrop" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+  <div class="modal"><div class="modal-head"><h2 id="chatTitle">Conversation</h2><button class="close" id="closeChat" aria-label="Close">×</button></div>
+    <div id="chatMessages" class="comment-list">Hey! Welcome to VibeLoop 👋</div>
+    <form class="comment-form" id="chatForm"><input id="chatInput" placeholder="Write a demo message..." maxlength="300" aria-label="Message"><button>Send</button></form>
+    <p class="disclaimer">Demo only: messages are not sent to another person.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const STORE_KEY='vibeloop_redesign_posts_v1';
+let currentView='home', postMode='post', searchTerm='', activeChat='';
+let profile={name:localStorage.getItem('vl_name')||'Vibe Explorer',handle:localStorage.getItem('vl_handle')||'yourvibe'};
+let posts=[];
+try{posts=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(!Array.isArray(posts))posts=[]}catch(e){posts=[]}
+const samples=[
+{id:'sample-1',name:'Mia Kapoor',handle:'miamakes',avatar:'🌷',time:'12 min ago',text:'A reminder to slow down and notice the little things. Today’s sky felt like a soft reset. 💜',emoji:'🌅',mood:'lavender',likes:24,liked:false,comments:['This feels peaceful ✨'],saved:false,sample:true},
+{id:'sample-2',name:'Arjun Mehta',handle:'arjun.outdoors',avatar:'🏄',time:'38 min ago',text:'Fresh air, a quiet trail, and absolutely no rush. More days like this, please. 🌿',emoji:'🌲',mood:'mint',likes:18,liked:false,comments:['Need this kind of day!'],saved:false,sample:true},
+{id:'sample-3',name:'Zoya Khan',handle:'zoyasketches',avatar:'🎨',time:'1 hr ago',text:'Made a tiny thing just because it made me happy. Creating without pressure is a whole vibe. 🎨',emoji:'🦋',mood:'peach',likes:31,liked:false,comments:['So pretty!'],saved:false,sample:true}
+];
+function allPosts(){return [...posts,...samples]}
+function persist(){try{localStorage.setItem(STORE_KEY,JSON.stringify(posts))}catch(e){toast('Browser storage is full. Try removing a post.')} }
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function moodClass(m){return m==='peach'?'peach':m==='mint'?'mint':''}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+function setView(view){currentView=view;$$('.view').forEach(el=>el.classList.toggle('active',el.id==='view-'+view));$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));if(view==='home')renderFeed();if(view==='explore')renderExplore();if(view==='reels')renderReels();if(view==='profile')renderProfile();window.scrollTo({top:0,behavior:'smooth'})}
+function navClick(e){const b=e.target.closest('[data-view]');if(b)setView(b.dataset.view)}
+$('#sideNav').addEventListener('click',navClick);$('#bottomNav').addEventListener('click',navClick);
+function openPostModal(mode='post'){postMode=mode;$('#modalTitle').textContent=mode==='reel'?'Share a reel moment':'Share your vibe';$('#postCaption').value='';$('#postEmoji').value=mode==='reel'?'🎬':'';$('#postModal').classList.add('open');setTimeout(()=>$('#postCaption').focus(),100)}
+function closePostModal(){$('#postModal').classList.remove('open')}
+['composeOpen','welcomeCreate','sidebarCreate','mobileCreate','photoCreate','thoughtCreate'].forEach(id=>$('#'+id).addEventListener('click',()=>openPostModal('post')));
+$('#reelCreate').addEventListener('click',()=>openPostModal('reel'));$('#reelUpload').addEventListener('click',()=>openPostModal('reel'));
+$('#closeModal').addEventListener('click',closePostModal);$('#cancelPost').addEventListener('click',closePostModal);
+$('#postModal').addEventListener('click',e=>{if(e.target.id==='postModal')closePostModal()});
+$('#publishPost').addEventListener('click',()=>{const text=$('#postCaption').value.trim();const emoji=$('#postEmoji').value.trim()||(postMode==='reel'?'🎬':'✨');if(!text){toast('Add a caption first 😊');$('#postCaption').focus();return}posts.unshift({id:'post-'+Date.now(),name:profile.name,handle:profile.handle,avatar:'🌙',time:'Just now',text,emoji,mood:$('#postMood').value,likes:0,liked:false,comments:[],saved:false,reel:postMode==='reel'});persist();closePostModal();renderAll();setView(postMode==='reel'?'reels':'home');toast('Your vibe was added to this browser!')});
+function postHTML(p){const mine=p.handle===profile.handle;return `<article class="post" data-post-id="${escapeHTML(p.id)}"><div class="post-head"><div class="avatar">${escapeHTML(p.avatar||'V')}</div><div class="post-author"><strong>${escapeHTML(p.name)}</strong><small>@${escapeHTML(p.handle)} · ${escapeHTML(p.time||'Recently')}</small></div><button class="dots" data-action="more" aria-label="More options">···</button></div><p class="post-text">${escapeHTML(p.text)}</p><div class="post-art ${moodClass(p.mood)}"><div><span class="art-emoji">${escapeHTML(p.emoji||'✨')}</span><strong>${p.reel?'A little reel moment':'A little moment, shared.'}</strong><small>YOUR WORLD · YOUR VIBE</small></div></div><div class="post-actions"><button class="post-action ${p.liked?'liked':''}" data-action="like"><span>${p.liked?'♥':'♡'}</span> <b>${p.likes||0}</b></button><button class="post-action" data-action="comments"><span>♧</span> ${p.comments?.length||0} comments</button><button class="post-action ${p.saved?'saved':''}" data-action="save"><span>${p.saved?'▣':'♧'}</span></button></div><div class="comments" id="comments-${escapeHTML(p.id)}"><div class="comment-list">${(p.comments||[]).map(c=>`<div>💬 ${escapeHTML(c)}</div>`).join('')||'Be the first to leave a kind comment.'}</div><form class="comment-form" data-comment-form><input maxlength="250" placeholder="Add a thoughtful comment..." aria-label="Comment"><button>Send</button></form></div></article>`}
+function renderFeed(){const term=searchTerm.toLowerCase();let list=allPosts().filter(p=>(p.text+' '+p.name+' '+p.handle).toLowerCase().includes(term));$('#feedPosts').innerHTML=list.length?list.map(postHTML).join(''):`<div class="empty"><div class="big">🔎</div><h3>No vibes found</h3><p>Try a different search.</p></div>`;$('#feedCount').textContent=posts.length?`${posts.length} of your posts`:'Fresh vibes';}
+function renderExplore(){const term=searchTerm.toLowerCase();let list=allPosts().filter(p=>(p.text+' '+p.name+' '+p.handle).toLowerCase().includes(term));$('#explorePosts').innerHTML=list.length?list.map(postHTML).join(''):`<div class="empty"><div class="big">🌱</div><h3>Nothing here yet</h3><p>Try another search term.</p></div>`}
+function renderReels(){const list=allPosts().filter(p=>p.reel||p.sample).filter(p=>(p.text+' '+p.name).toLowerCase().includes(searchTerm.toLowerCase()));$('#reelsList').innerHTML=list.length?list.map(p=>`<article class="reel-card ${moodClass(p.mood)}"><div class="reel-center">${escapeHTML(p.emoji||'🎬')}</div><div class="reel-copy"><strong>${escapeHTML(p.name)} · @${escapeHTML(p.handle)}</strong><p>${escapeHTML(p.text)}</p><p>♡ ${p.likes||0} likes · Sample visual, not an uploaded video</p></div></article>`).join(''):`<div class="empty"><div class="big">🎬</div><h3>No reel moments found</h3><p>Share a reel-style post to start your collection.</p></div>`}
+function renderProfile(){ $('#profileName').textContent=profile.name;$('#profileHandle').textContent='@'+profile.handle+' · finding my own loop';$('#profilePostCount').textContent=posts.length;$('#profileGrid').innerHTML=posts.length?posts.map(p=>`<div class="profile-tile" title="${escapeHTML(p.text)}">${escapeHTML(p.emoji||'✨')}</div>`).join(''):'<div class="empty" style="grid-column:1/-1"><div class="big">🌙</div><h3>Your story starts here</h3><p>Share your first moment with the world.</p><button class="primary" onclick="openPostModal()">Create a post</button></div>'}
+function renderAll(){renderFeed();renderExplore();renderReels();renderProfile()}
+document.addEventListener('click',e=>{
+ const action=e.target.closest('[data-action]');if(action){const card=action.closest('[data-post-id]');if(!card)return;const id=card.dataset.postId;let p=posts.find(x=>x.id===id)||samples.find(x=>x.id===id);if(!p)return;
+ if(action.dataset.action==='like'){p.liked=!p.liked;p.likes=Math.max(0,(p.likes||0)+(p.liked?1:-1));if(!p.sample)persist();renderAll()}
+ if(action.dataset.action==='save'){p.saved=!p.saved;if(!p.sample)persist();renderAll();toast(p.saved?'Saved to your collection':'Removed from saved')}
+ if(action.dataset.action==='comments'){const box=card.querySelector('.comments');box.classList.toggle('show');}
+ if(action.dataset.action==='more'){if(p.handle===profile.handle){if(confirm('Delete this post from this browser?')){posts=posts.filter(x=>x.id!==id);persist();renderAll();toast('Post removed')}}else toast('This is a community preview post.')}
+ }
+ const story=e.target.closest('[data-story]');if(story)toast(story.dataset.story+'’s story preview is coming soon.');
+ const follow=e.target.closest('.follow');if(follow){follow.classList.toggle('following');follow.textContent=follow.classList.contains('following')?'Following':'Follow'}
+ const chat=e.target.closest('[data-chat]');if(chat){activeChat=chat.dataset.chat;$('#chatTitle').textContent=activeChat;$('#chatMessages').innerHTML='Hey! Welcome to this demo conversation 👋';$('#chatModal').classList.add('open')}
+});
+document.addEventListener('submit',e=>{
+ if(e.target.matches('[data-comment-form]')){e.preventDefault();const card=e.target.closest('[data-post-id]');const id=card.dataset.postId;const p=posts.find(x=>x.id===id)||samples.find(x=>x.id===id);const input=e.target.querySelector('input');const val=input.value.trim();if(!val)return;p.comments=p.comments||[];p.comments.push(profile.name+': '+val);if(!p.sample)persist();renderAll();const target=document.querySelector('#comments-'+CSS.escape(id));if(target)target.classList.add('show');toast('Comment added in this preview')}
+ if(e.target.id==='chatForm'){e.preventDefault();const input=$('#chatInput');const val=input.value.trim();if(!val)return;const line=document.createElement('div');line.textContent=profile.name+': '+val;$('#chatMessages').appendChild(line);input.value='';toast('Demo message added locally')}
+});
+$('#searchInput').addEventListener('input',e=>{searchTerm=e.target.value;renderAll()});
+$('#topProfile').addEventListener('click',()=>setView('profile'));
+$('#notifyBtn').addEventListener('click',()=>toast('You’re all caught up ✨'));
+$('#addStory').addEventListener('click',()=>toast('Story sharing will be added with the backend.'));
+$('#editProfile').addEventListener('click',()=>{$('#nameInput').value=profile.name;$('#handleInput').value=profile.handle;$('#editModal').classList.add('open')});
+function closeEdit(){$('#editModal').classList.remove('open')}
+$('#closeEdit').addEventListener('click',closeEdit);$('#cancelEdit').addEventListener('click',closeEdit);
+$('#saveProfile').addEventListener('click',()=>{const name=$('#nameInput').value.trim();const handle=$('#handleInput').value.trim().replace(/^@/,'').replace(/[^a-zA-Z0-9_.]/g,'');if(!name||!handle){toast('Please enter a name and handle');return}profile={name,handle};localStorage.setItem('vl_name',name);localStorage.setItem('vl_handle',handle);closeEdit();renderAll();toast('Profile updated on this browser')});
+$('#shareProfile').addEventListener('click',async()=>{const text='Check out my VibeLoop profile: @'+profile.handle;try{if(navigator.share)await navigator.share({title:'VibeLoop profile',text});else if(navigator.clipboard){await navigator.clipboard.writeText(text);toast('Profile text copied')}else toast(text)}catch(e){}});
+function closeChat(){$('#chatModal').classList.remove('open')}
+$('#closeChat').addEventListener('click',closeChat);$('#chatModal').addEventListener('click',e=>{if(e.target.id==='chatModal')closeChat()});
+$('#editModal').addEventListener('click',e=>{if(e.target.id==='editModal')closeEdit()});
+renderAll();
+</script>
+</body>
+</html>
