@@ -3,408 +3,443 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>VibeLoop — Your World, Your Vibe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#202326">
+<title>VibeLoop — Your Vibe. Your World.</title>
 <style>
 :root {
-  --purple:#6d5ce8;
-  --light:#f3f0ff;
-  --text:#191827;
-  --muted:#858394;
-  --line:#eceaf3;
+  --bg: #202326;
+  --panel: #292d30;
+  --panel2: #33383b;
+  --lime: #a3ff12;
+  --text: #f5f7f2;
+  --muted: #a3aaa5;
+  --border: #414649;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:#faf9ff;color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, Arial, sans-serif;
 }
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.topbar{
-  position:sticky;top:0;z-index:5;
-  background:#ffffffed;backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-  padding:14px 18px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #202326f5;
+  border-bottom: 1px solid var(--border);
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
-.brand{font-size:23px;font-weight:800;letter-spacing:-1px}
-.brand span{color:var(--purple)}
-.logo{
-  display:inline-grid;place-items:center;
-  width:39px;height:39px;border-radius:13px;
-  color:white;background:linear-gradient(135deg,#9a8bff,#5c48dc);
-  margin-right:7px;
+.logo {
+  color: var(--lime);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
-.search{
-  display:flex;align-items:center;gap:8px;
-  background:#f7f6fc;border:1px solid var(--line);
-  border-radius:22px;padding:11px 13px;
-  width:min(42%,350px);
+.pill, .btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
 }
-.search input{width:100%;border:0;outline:0;background:transparent}
-.avatar{
-  width:43px;height:43px;border-radius:50%;
-  background:linear-gradient(135deg,#e9e3ff,#c4b7ff);
-  color:#5947c9;display:grid;place-items:center;
-  font-weight:800;flex-shrink:0;
+.btn.primary {
+  color: #172000;
+  background: var(--lime);
+  border-color: var(--lime);
+  font-weight: 800;
 }
-.layout{max-width:1100px;margin:auto;padding:22px}
-.welcome{
-  padding:24px;border:1px solid var(--line);
-  border-radius:25px;background:linear-gradient(120deg,#fff,#f0edff);
-  margin-bottom:24px;
+main {
+  max-width: 760px;
+  margin: 25px auto 110px;
+  padding: 0 16px;
 }
-.welcome h1{font-size:30px;margin:8px 0}
-.welcome p{color:var(--muted);line-height:1.6}
-.primary{
-  border:0;border-radius:14px;background:var(--purple);
-  color:white;font-weight:bold;padding:13px 18px;
-  box-shadow:0 8px 20px #6d5ce833;
+h1 { font-size: 29px; margin: 8px 0; }
+h2 { font-size: 19px; }
+.muted { color: var(--muted); }
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 17px;
+  margin: 17px 0;
 }
-.heading{
-  display:flex;justify-content:space-between;align-items:center;
-  margin:22px 0 14px;
+.eyebrow {
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
-.heading h2{font-size:20px;margin:0}
-.muted{font-size:13px;color:var(--muted)}
-.stories{display:flex;gap:16px;overflow-x:auto;padding:4px 0 16px}
-.story{min-width:65px;text-align:center;color:var(--muted);font-size:12px}
-.story-ring{
-  width:62px;height:62px;padding:3px;margin:auto auto 7px;
-  border-radius:50%;background:linear-gradient(135deg,#a99bff,#6d5ce8,#ef9dce);
+.stories {
+  display: flex;
+  gap: 17px;
+  overflow-x: auto;
+  padding: 5px 0 12px;
 }
-.story-inner{
-  height:100%;border:3px solid white;border-radius:50%;
-  background:#eeeaff;display:grid;place-items:center;font-size:25px;
+.story {
+  min-width: 68px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
 }
-.card{
-  background:white;border:1px solid var(--line);
-  border-radius:23px;padding:17px;margin-bottom:17px;
-  box-shadow:0 5px 20px #29204a05;
+.ring {
+  width: 62px;
+  height: 62px;
+  margin: auto auto 8px;
+  border-radius: 50%;
+  border: 3px solid var(--lime);
+  display: grid;
+  place-items: center;
+  background: var(--panel2);
+  font-size: 25px;
 }
-.compose{display:flex;gap:12px;align-items:center}
-.compose input{
-  flex:1;min-width:0;border:1px solid var(--line);
-  border-radius:17px;padding:15px;background:#faf9ff;
+.post-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.small-btn{
-  background:white;border:1px solid var(--line);
-  border-radius:12px;padding:10px 12px;color:#646174;
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--lime);
+  color: #172000;
+  font-weight: 900;
+  margin-right: 9px;
 }
-.post-head{display:flex;align-items:center;gap:10px}
-.post-head .details{flex:1}
-.details strong{display:block}
-.details small{display:block;color:var(--muted);margin-top:4px}
-.post-text{line-height:1.7}
-.post-art{
-  min-height:210px;border-radius:18px;
-  background:linear-gradient(140deg,#e7e0ff,#e0f5ff);
-  display:grid;place-items:center;text-align:center;
-  color:#5b49c9;font-size:23px;padding:20px;
+.post-art {
+  min-height: 210px;
+  border-radius: 14px;
+  margin-top: 15px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 25px;
+  background: linear-gradient(135deg,#38432c,#1c303a,#46365c);
 }
-.post-art span{display:block;font-size:55px;margin-bottom:10px}
-.post-actions{display:flex;gap:20px;margin-top:14px}
-.post-actions button{border:0;background:none;color:#777386}
-.view{display:none}
-.view.active{display:block}
-.explore-search{
-  display:flex;align-items:center;gap:10px;
-  border:1px solid var(--line);background:white;
-  border-radius:16px;padding:15px;margin:16px 0 20px;
+.post-art strong {
+  font-size: clamp(28px, 7vw, 48px);
+  letter-spacing: -2px;
 }
-.explore-search input{border:0;outline:0;width:100%;background:transparent}
-.explore-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
 }
-.topic{
-  min-height:145px;border-radius:20px;padding:17px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  background:linear-gradient(145deg,#e9e3ff,#c9bbff);
-  color:#382c8d;font-weight:bold;
+.actions button { flex: 1; min-width: 75px; }
+textarea, input, select {
+  width: 100%;
+  background: #202326;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 13px;
+  border-radius: 12px;
+  margin: 8px 0;
 }
-.topic:nth-child(2){background:linear-gradient(145deg,#ffe6f0,#f7c5dc)}
-.topic:nth-child(3){background:linear-gradient(145deg,#d9f8ed,#b2e9d8)}
-.topic:nth-child(4){background:linear-gradient(145deg,#fff0d9,#ffd9a9)}
-.topic span{font-size:35px}
-.reel{
-  min-height:340px;border-radius:22px;padding:20px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  color:white;background:linear-gradient(145deg,#30204d,#8870ed,#f3a5c9);
-  margin-bottom:15px;
+.view { display: none; }
+.view.active { display: block; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
 }
-.reel .emoji{font-size:80px;text-align:center;margin:auto}
-.chat-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
-.chat-row:last-child{border:0}
-.chat-info{flex:1}
-.chat-info small{display:block;color:var(--muted);margin-top:5px}
-.profile{text-align:center}
-.profile .avatar{width:82px;height:82px;font-size:28px;margin:0 auto 12px}
-.stats{display:flex;justify-content:space-around;margin:24px 0}
-.stats strong{display:block;font-size:20px}
-.stats span{color:var(--muted);font-size:13px}
-.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.tile{
-  aspect-ratio:1;border-radius:13px;background:linear-gradient(145deg,#e6e0ff,#c6baff);
-  display:grid;place-items:center;font-size:30px;
+.tile {
+  background: var(--panel2);
+  min-height: 120px;
+  padding: 18px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
 }
-.bottom-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:10;
-  background:#ffffffef;backdrop-filter:blur(14px);
-  border-top:1px solid var(--line);
-  justify-content:space-around;padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+.tile b { color: var(--lime); }
+.bottom {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 4px calc(10px + env(safe-area-inset-bottom));
+  background: #202326f5;
+  border-top: 1px solid var(--border);
 }
-.nav-btn{
-  background:none;border:0;color:#858394;
-  display:flex;flex-direction:column;align-items:center;
-  gap:5px;font-size:11px;min-width:45px;
+.bottom button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 5px;
 }
-.nav-btn b{font-size:22px;font-weight:normal}
-.nav-btn.active{color:var(--purple);font-weight:bold}
-.floating-create{
-  display:none;position:fixed;z-index:12;right:18px;bottom:88px;
-  width:59px;height:59px;border:3px solid white;border-radius:20px;
-  background:linear-gradient(145deg,#9484ff,#5b46d9);color:white;
-  font-size:35px;box-shadow:0 8px 24px #6d5ce866;
+.bottom button span {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 3px;
 }
-.modal{
-  display:none;position:fixed;inset:0;z-index:20;
-  background:#17132977;align-items:center;justify-content:center;padding:20px;
+.bottom button.active { color: var(--lime); }
+.create-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  z-index: 8;
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 19px;
+  background: var(--lime);
+  color: #172000;
+  font-size: 31px;
+  box-shadow: 0 0 25px #a3ff1240;
 }
-.modal.open{display:flex}
-.modal-box{background:white;padding:22px;border-radius:22px;width:min(100%,420px)}
-.modal-box input,.modal-box textarea{
-  width:100%;border:1px solid var(--line);border-radius:12px;
-  padding:12px;margin:8px 0;
-}
-@media(min-width:850px){
-  .layout{display:grid;grid-template-columns:190px minmax(0,650px) 190px;gap:22px}
-  .desktop-nav{display:block}
-}
-.desktop-nav{display:none}
-.desktop-nav .card{padding:10px}
-.desktop-nav button{
-  display:block;width:100%;text-align:left;border:0;background:white;
-  padding:13px;border-radius:12px;color:#696679;
-}
-.desktop-nav button.active{background:#f0edff;color:var(--purple)}
-@media(max-width:849px){
-  .layout{padding:16px 14px 105px}
-  .bottom-nav{display:flex}
-  .floating-create{display:block}
-  .welcome h1{font-size:25px}
-  .search{width:40%}
-}
-@media(max-width:390px){
-  .brand{font-size:19px}
-  .search{width:38%;padding:10px}
-  .topbar{padding:12px}
-  .layout{padding-left:10px;padding-right:10px}
+.statrow { display: flex; justify-content: space-around; text-align: center; }
+.statrow strong { display: block; font-size: 20px; }
+#notice { color: var(--lime); font-size: 13px; }
+@media(min-width:700px) {
+  main { margin-top: 35px; }
+  .bottom { left: 50%; right: auto; transform: translateX(-50%); width: min(650px,95%); border: 1px solid var(--border); border-radius: 18px 18px 0 0; }
 }
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand"><span class="logo">〰</span>Vibe<span>Loop</span></div>
-  <label class="search">⌕ <input id="globalSearch" placeholder="Find your vibe..."></label>
-  <button class="avatar" onclick="showView('profile')">V</button>
+
+<header>
+  <div class="logo">∞ VibeLoop</div>
+  <button class="pill" onclick="showView('explore')">⌕ Search</button>
 </header>
 
-<div class="layout">
-  <aside class="desktop-nav">
-    <div class="card" id="sideNav">
-      <button data-view="home" class="active">⌂ &nbsp; Home</button>
-      <button data-view="reels">▣ &nbsp; Reels</button>
-      <button data-view="messages">◌ &nbsp; Messages</button>
-      <button data-view="explore">⌕ &nbsp; Explore</button>
-      <button data-view="profile">◎ &nbsp; Profile</button>
-      <button onclick="openCreate()">＋ &nbsp; Create post</button>
+<main>
+  <section id="home" class="view active">
+    <p class="eyebrow">YOUR WORLD. YOUR PEOPLE.</p>
+    <h1>Your vibe, your space.</h1>
+    <p class="muted">Discover people. Share moments. Be yourself.</p>
+
+    <div class="card">
+      <div class="post-head">
+        <div>
+          <h2 style="margin:0">Stories</h2>
+          <small class="muted">Little moments, your way</small>
+        </div>
+        <span style="color:var(--lime)">24h*</span>
+      </div>
+      <div class="stories" id="stories">
+        <div class="story" onclick="addStory()">
+          <div class="ring">＋</div>Your story
+        </div>
+        <div class="story" onclick="viewStory('Arjun')">
+          <div class="ring">🏔️</div>Arjun
+        </div>
+        <div class="story" onclick="viewStory('Zoya')">
+          <div class="ring">🎨</div>Zoya
+        </div>
+        <div class="story" onclick="viewStory('Kabir')">
+          <div class="ring">🎧</div>Kabir
+        </div>
+        <div class="story" onclick="viewStory('Ira')">
+          <div class="ring">🌿</div>Ira
+        </div>
+      </div>
     </div>
-  </aside>
 
-  <main>
-    <section class="view active" id="view-home">
-      <div class="welcome">
-        <div class="muted">WELCOME TO VIBELOOP</div>
-        <h1>Your world. Your vibe. 💜</h1>
-        <p>Find your people. Share your moments. Keep the good vibes looping.</p>
-        <button class="primary" onclick="openCreate()">＋ Create a post</button>
-      </div>
+    <div class="card">
+      <h2>Create a post</h2>
+      <textarea id="postText" rows="3" placeholder="What's your vibe today?"></textarea>
+      <button class="btn primary" onclick="createPost()">Share post ↗</button>
+      <p class="muted" style="font-size:12px">Demo posts are saved only in this browser.</p>
+    </div>
 
-      <div class="heading"><h2>Vibe circles</h2><span class="muted">Little moments, big energy</span></div>
-      <div class="stories">
-        <div class="story"><div class="story-ring"><div class="story-inner">🌷</div></div>Mia</div>
-        <div class="story"><div class="story-ring"><div class="story-inner">🏄</div></div>Arjun</div>
-        <div class="story"><div class="story-ring"><div class="story-inner">🎨</div></div>Zoya</div>
-        <div class="story"><div class="story-ring"><div class="story-inner">🎧</div></div>Kabir</div>
-        <div class="story"><div class="story-ring"><div class="story-inner">🌿</div></div>Ira</div>
-      </div>
-
-      <div class="card">
-        <div class="compose"><div class="avatar">V</div><input id="quickCaption" placeholder="What's your vibe today?"></div>
+    <h2>Your Feed</h2>
+    <div id="feed">
+      <article class="card">
+        <div class="post-head">
+          <div><span class="avatar">A</span><b>Arjun Mehta</b><br>
+          <small class="muted">2 hours ago</small></div>
+          <span class="muted">•••</span>
+        </div>
+        <div class="post-art"><div><strong>STAY IN<br>YOUR FLOW.</strong><p>Small steps. Big energy. 💚</p></div></div>
         <div class="actions">
-          <button class="small-btn" onclick="openCreate()">▧ Photo post</button>
-          <button class="small-btn" onclick="openCreate()">✎ Thought</button>
-          <button class="small-btn" onclick="showView('reels')">▷ Share a reel</button>
+          <button class="btn" onclick="likePost(this)">♡ Like</button>
+          <button class="btn" onclick="alert('Comments demo')">◯ Comment</button>
+          <button class="btn" onclick="sharePost()">↗ Share</button>
         </div>
-      </div>
-
-      <div class="heading"><h2>Your feed</h2><span class="muted">Fresh vibes</span></div>
-      <div id="feed"></div>
-    </section>
-
-    <section class="view" id="view-reels">
-      <div class="heading"><h2>Reels</h2><span class="muted">Short videos. Big vibes.</span></div>
-      <div id="reels"></div>
-      <button class="primary" onclick="openCreate()">＋ Share a reel moment</button>
-    </section>
-
-    <section class="view" id="view-messages">
-      <div class="heading"><h2>Messages</h2><span class="muted">Your conversations</span></div>
-      <div class="card">
-        <div class="chat-row"><div class="avatar">M</div><div class="chat-info"><strong>Mia Kapoor</strong><small>Hey! How's your day? 💜</small></div><button class="small-btn" onclick="demoChat('Mia Kapoor')">Chat</button></div>
-        <div class="chat-row"><div class="avatar">A</div><div class="chat-info"><strong>Arjun Mehta</strong><small>That reel was funny 😂</small></div><button class="small-btn" onclick="demoChat('Arjun Mehta')">Chat</button></div>
-        <div class="chat-row"><div class="avatar">Z</div><div class="chat-info"><strong>Zoya Khan</strong><small>See you soon!</small></div><button class="small-btn" onclick="demoChat('Zoya Khan')">Chat</button></div>
-      </div>
-    </section>
-
-    <section class="view" id="view-explore">
-      <div class="heading"><h2>Explore</h2></div>
-      <label class="explore-search">⌕ <input id="exploreSearch" placeholder="Search users, hashtags, topics..."></label>
-      <!-- No Trending, Following, or For You tabs -->
-      <div class="explore-grid" id="exploreGrid">
-        <div class="topic"><span>🏔️</span>#Travel <small>Explore new places</small></div>
-        <div class="topic"><span>📸</span>#Photography <small>Capture your world</small></div>
-        <div class="topic"><span>🎯</span>#Motivation <small>Small steps, big dreams</small></div>
-        <div class="topic"><span>🍓</span>#Food <small>Good things to share</small></div>
-        <div class="topic"><span>🏃</span>#Fitness <small>Move with purpose</small></div>
-        <div class="topic"><span>🌸</span>#Aesthetic <small>Find your vibe</small></div>
-      </div>
-      <div id="searchResults"></div>
-    </section>
-
-    <section class="view" id="view-profile">
-      <div class="card profile">
-        <div class="avatar">V</div>
-        <h2 id="profileName">Vivan Kumar</h2>
-        <p class="muted" id="profileHandle">@vivan_kumar</p>
-        <div class="stats">
-          <div><strong id="postCount">0</strong><span>Posts</span></div>
-          <div><strong>0</strong><span>Followers</span></div>
-          <div><strong>0</strong><span>Following</span></div>
+      </article>
+      <article class="card">
+        <div class="post-head">
+          <div><span class="avatar">Z</span><b>Zoya Khan</b><br>
+          <small class="muted">5 hours ago</small></div>
         </div>
-        <button class="primary" onclick="editProfile()">Edit profile</button>
-      </div>
-      <div class="heading"><h2>Your posts</h2></div>
-      <div class="profile-grid" id="profileGrid"></div>
-    </section>
-  </main>
-</div>
-
-<nav class="bottom-nav" id="bottomNav">
-  <button class="nav-btn active" data-view="home"><b>⌂</b>Home</button>
-  <button class="nav-btn" data-view="reels"><b>▣</b>Reels</button>
-  <button class="nav-btn" data-view="messages"><b>◌</b>Messages</button>
-  <button class="nav-btn" data-view="explore"><b>⌕</b>Explore</button>
-  <button class="nav-btn" data-view="profile"><b>◎</b>Profile</button>
-</nav>
-<button class="floating-create" onclick="openCreate()" aria-label="Create a post">＋</button>
-
-<div class="modal" id="createModal">
-  <div class="modal-box">
-    <h2>Create your vibe 💜</h2>
-    <input id="postEmoji" placeholder="Emoji (e.g. ✨)">
-    <textarea id="postText" rows="4" placeholder="What's on your mind?"></textarea>
-    <div class="actions">
-      <button class="primary" onclick="publishPost()">Publish</button>
-      <button class="small-btn" onclick="closeCreate()">Cancel</button>
+        <p>Collect moments, not expectations. ✨</p>
+        <div class="actions">
+          <button class="btn" onclick="likePost(this)">♡ Like</button>
+          <button class="btn" onclick="alert('Comments demo')">◯ Comment</button>
+          <button class="btn" onclick="sharePost()">↗ Share</button>
+        </div>
+      </article>
     </div>
-  </div>
-</div>
+  </section>
+
+  <section id="reels" class="view">
+    <p class="eyebrow">QUICK. CREATIVE. YOU.</p>
+    <h1>Reels</h1>
+    <div class="card post-art"><div><strong>Your next<br>moment.</strong><p>Short videos belong here.</p></div></div>
+    <button class="btn primary" onclick="alert('Video upload needs backend setup')">＋ Create a reel</button>
+  </section>
+
+  <section id="messages" class="view">
+    <p class="eyebrow">STAY CONNECTED</p>
+    <h1>Messages</h1>
+    <p class="muted">Your conversations in one place.</p>
+    <div class="card" onclick="alert('Chat demo — real messaging needs backend')"> <span class="avatar">A</span><b>Arjun</b><p class="muted">Hey! What's your vibe today?</p></div>
+    <div class="card" onclick="alert('Chat demo — real messaging needs backend')"><span class="avatar">Z</span><b>Zoya</b><p class="muted">Shared a new moment ✨</p></div>
+    <p class="muted">Private multi-user chat will need backend integration.</p>
+  </section>
+
+  <section id="explore" class="view">
+    <p class="eyebrow">FIND YOUR PEOPLE</p>
+    <h1>Explore</h1>
+    <input id="search" placeholder="Search people, posts and vibes…" oninput="filterTiles()">
+    <div class="grid" id="tiles">
+      <div class="tile"><b># Creativity</b><p>Ideas & inspiration</p></div>
+      <div class="tile"><b># Gaming</b><p>Play. Share. Repeat.</p></div>
+      <div class="tile"><b># Lifestyle</b><p>Everyday moments</p></div>
+      <div class="tile"><b># Music</b><p>Find your rhythm</p></div>
+      <div class="tile"><b># Travel</b><p>See new places</p></div>
+      <div class="tile"><b># Community</b><p>Meet your people</p></div>
+    </div>
+  </section>
+
+  <section id="profile" class="view">
+    <p class="eyebrow">YOUR CORNER OF VIBELOOP</p>
+    <div class="card" style="text-align:center">
+      <div class="avatar" style="width:76px;height:76px;font-size:28px;margin:10px auto">Y</div>
+      <h1 id="profileName">Your Name</h1>
+      <p class="muted" id="bio">Making my own vibe. 💚</p>
+      <div class="statrow">
+        <div><strong id="postCount">0</strong><span class="muted">Posts</span></div>
+        <div><strong>0</strong><span class="muted">Followers</span></div>
+        <div><strong>0</strong><span class="muted">Following</span></div>
+      </div>
+      <hr style="border-color:var(--border);margin:20px 0">
+      <input id="nameInput" placeholder="Your display name">
+      <input id="bioInput" placeholder="Write a short bio">
+      <button class="btn primary" onclick="saveProfile()">Save profile</button>
+    </div>
+    <div class="card">
+      <h2>Settings</h2>
+      <label for="language">Language / भाषा</label>
+      <select id="language" onchange="languageNotice()">
+        <option>English</option>
+        <option>हिन्दी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+      <p id="languageMsg" class="muted">Language selector preview. Full translation is not connected yet.</p>
+    </div>
+  </section>
+
+  <p id="notice"></p>
+</main>
+
+<button class="create-fab" aria-label="Create post" onclick="showView('home');document.getElementById('postText').focus()">＋</button>
+
+<nav class="bottom">
+  <button class="active" data-view="home" onclick="showView('home',this)"><span>⌂</span>Home</button>
+  <button data-view="reels" onclick="showView('reels',this)"><span>▷</span>Reels</button>
+  <button data-view="messages" onclick="showView('messages',this)"><span>✉</span>Messages</button>
+  <button data-view="explore" onclick="showView('explore',this)"><span>⌕</span>Explore</button>
+  <button data-view="profile" onclick="showView('profile',this)"><span>◉</span>Profile</button>
+</nav>
 
 <script>
-const samples = [
- {name:"Mia Kapoor",handle:"miamakes",text:"A reminder to slow down and notice the little things. Today's sky felt like a soft reset. 💜",emoji:"🌅"},
- {name:"Arjun Mehta",handle:"arjunmoves",text:"A little progress is still progress. Keep going! ✨",emoji:"🏄"},
- {name:"Zoya Khan",handle:"zoyacreates",text:"Making ordinary days feel a little more magical. 🎨",emoji:"🌷"}
-];
-let posts = JSON.parse(localStorage.getItem("vibeloop_posts") || "[]");
-let currentUser = localStorage.getItem("vibeloop_name") || "Vivan Kumar";
-let currentHandle = localStorage.getItem("vibeloop_handle") || "vivan_kumar";
-
-function escapeHTML(s){
- return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function showView(id, button) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.bottom button').forEach(b => b.classList.remove('active'));
+  const navButton = document.querySelector('[data-view="' + id + '"]');
+  if (navButton) navButton.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
-function allPosts(){return [...posts,...samples]}
-function showView(view){
- document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+view));
- document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
- window.scrollTo({top:0,behavior:"smooth"});
+function createPost() {
+  const input = document.getElementById('postText');
+  const text = input.value.trim();
+  if (!text) { alert('Write something first!'); return; }
+  const card = document.createElement('article');
+  card.className = 'card';
+  const p = document.createElement('p');
+  p.textContent = text;
+  const note = document.createElement('small');
+  note.className = 'muted';
+  note.textContent = 'Just now · Local demo post';
+  const actions = document.createElement('div');
+  actions.className = 'actions';
+  const like = document.createElement('button');
+  like.className = 'btn';
+  like.textContent = '♡ Like';
+  like.onclick = () => likePost(like);
+  actions.append(like);
+  card.append(note, p, actions);
+  document.getElementById('feed').prepend(card);
+  input.value = '';
+  document.getElementById('postCount').textContent =
+    Number(document.getElementById('postCount').textContent) + 1;
 }
-document.getElementById("bottomNav").addEventListener("click",e=>{
- const b=e.target.closest("[data-view]");if(b)showView(b.dataset.view);
-});
-document.getElementById("sideNav").addEventListener("click",e=>{
- const b=e.target.closest("[data-view]");if(b)showView(b.dataset.view);
-});
-function postHTML(p,index){
- return `<article class="card">
- <div class="post-head"><div class="avatar">${escapeHTML(p.emoji||"V")}</div>
- <div class="details"><strong>${escapeHTML(p.name)}</strong><small>@${escapeHTML(p.handle)} · VibeLoop</small></div></div>
- <p class="post-text">${escapeHTML(p.text)}</p>
- <div class="post-art"><div><span>${escapeHTML(p.emoji||"✨")}</span>A little moment, shared.</div></div>
- <div class="post-actions"><button onclick="likePost(this)">♡ Like</button><button onclick="alert('Comments will be connected with the backend.')">♧ Comment</button><button onclick="alert('Share feature coming soon.')">↗ Share</button></div>
- </article>`;
+function likePost(button) {
+  const liked = button.dataset.liked === 'true';
+  button.dataset.liked = String(!liked);
+  button.textContent = liked ? '♡ Like' : '♥ Liked';
+  button.style.color = liked ? '' : 'var(--lime)';
 }
-function render(){
- document.getElementById("feed").innerHTML=allPosts().map(postHTML).join("");
- document.getElementById("reels").innerHTML=posts.filter(p=>p.reel).map(p=>`<div class="reel"><div class="emoji">${escapeHTML(p.emoji||"🎬")}</div><div><strong>@${escapeHTML(p.handle)}</strong><p>${escapeHTML(p.text)}</p></div></div>`).join("") || `<div class="card">Your reel moments will appear here. Create a reel-style post to get started.</div>`;
- document.getElementById("postCount").textContent=posts.length;
- document.getElementById("profileName").textContent=currentUser;
- document.getElementById("profileHandle").textContent="@"+currentHandle;
- document.getElementById("profileGrid").innerHTML=posts.map(p=>`<div class="tile">${escapeHTML(p.emoji||"✨")}</div>`).join("");
+function sharePost() {
+  if (navigator.share) navigator.share({title:'VibeLoop',text:'Check out VibeLoop!'});
+  else alert('VibeLoop — Your Vibe. Your World.');
 }
-function likePost(button){
- button.textContent=button.textContent.includes("♡")?"♥ Liked":"♡ Like";
- button.style.color=button.textContent.includes("Liked")?"#e34f82":"";
+function viewStory(name) {
+  alert(name + "'s sample story. Real stories need upload and expiry support.");
 }
-function openCreate(){document.getElementById("createModal").classList.add("open")}
-function closeCreate(){document.getElementById("createModal").classList.remove("open")}
-function publishPost(){
- const text=document.getElementById("postText").value.trim();
- const emoji=document.getElementById("postEmoji").value.trim()||"✨";
- if(!text){alert("Please write something first!");return}
- posts.unshift({name:currentUser,handle:currentHandle,text,emoji,reel:false});
- localStorage.setItem("vibeloop_posts",JSON.stringify(posts));
- document.getElementById("postText").value="";
- document.getElementById("postEmoji").value="";
- closeCreate();render();showView("home");
+function addStory() {
+  const story = prompt('Write a short story update:');
+  if (!story || !story.trim()) return;
+  const item = document.createElement('div');
+  item.className = 'story';
+  const ring = document.createElement('div');
+  ring.className = 'ring';
+  ring.textContent = '💚';
+  const label = document.createElement('div');
+  label.textContent = 'Your story';
+  item.append(ring, label);
+  item.onclick = () => alert(story);
+  document.getElementById('stories').append(item);
 }
-function editProfile(){
- const name=prompt("Your display name:",currentUser);
- if(!name)return;
- const handle=prompt("Your username:",currentHandle);
- if(!handle)return;
- currentUser=name.trim();currentHandle=handle.trim().replace(/^@/,"");
- localStorage.setItem("vibeloop_name",currentUser);
- localStorage.setItem("vibeloop_handle",currentHandle);
- render();
+function saveProfile() {
+  const name = document.getElementById('nameInput').value.trim();
+  const bio = document.getElementById('bioInput').value.trim();
+  if (name) document.getElementById('profileName').textContent = name;
+  if (bio) document.getElementById('bio').textContent = bio;
+  alert('Profile updated in this demo.');
 }
-function demoChat(name){
- const message=prompt("Demo message to "+name+":");
- if(message)alert("Message shown in this preview only. Real chat needs a backend.");
+function filterTiles() {
+  const q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('#tiles .tile').forEach(tile => {
+    tile.style.display = tile.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
 }
-document.getElementById("globalSearch").addEventListener("input",e=>{
- const q=e.target.value.toLowerCase();
- document.getElementById("feed").innerHTML=allPosts().filter(p=>(p.text+p.name+p.handle).toLowerCase().includes(q)).map(postHTML).join("");
-});
-document.getElementById("exploreSearch").addEventListener("input",e=>{
- const q=e.target.value.toLowerCase();
- const matches=allPosts().filter(p=>(p.text+p.name+p.handle).toLowerCase().includes(q));
- document.getElementById("searchResults").innerHTML=q?matches.map(postHTML).join(""):"";
-});
-render();
+function languageNotice() {
+  document.getElementById('languageMsg').textContent =
+    'Selected: ' + document.getElementById('language').value +
+    '. Full app translation will be added next.';
+}
 </script>
 </body>
-</html>
+  </html>
+            
