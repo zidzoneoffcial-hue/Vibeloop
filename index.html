@@ -1,215 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#202326">
-<title>VibeLoop — Your Vibe. Your World.</title>
-<style>
-:root {
-  --bg: #202326;
-  --panel: #292d30;
-  --panel2: #33383b;
-  --lime: #a3ff12;
-  --text: #f5f7f2;
-  --muted: #a3aaa5;
-  --border: #414649;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, Arial, sans-serif;
-}
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: #202326f5;
-  border-bottom: 1px solid var(--border);
-  padding: 15px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-.logo {
-  color: var(--lime);
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-.pill, .btn {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 12px;
-}
-.btn.primary {
-  color: #172000;
-  background: var(--lime);
-  border-color: var(--lime);
-  font-weight: 800;
-}
-main {
-  max-width: 760px;
-  margin: 25px auto 110px;
-  padding: 0 16px;
-}
-h1 { font-size: 29px; margin: 8px 0; }
-h2 { font-size: 19px; }
-.muted { color: var(--muted); }
-.card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 19px;
-  padding: 17px;
-  margin: 17px 0;
-}
-.eyebrow {
-  color: var(--lime);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-.stories {
-  display: flex;
-  gap: 17px;
-  overflow-x: auto;
-  padding: 5px 0 12px;
-}
-.story {
-  min-width: 68px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 12px;
-}
-.ring {
-  width: 62px;
-  height: 62px;
-  margin: auto auto 8px;
-  border-radius: 50%;
-  border: 3px solid var(--lime);
-  display: grid;
-  place-items: center;
-  background: var(--panel2);
-  font-size: 25px;
-}
-.post-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-.avatar {
-  display: inline-grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: var(--lime);
-  color: #172000;
-  font-weight: 900;
-  margin-right: 9px;
-}
-.post-art {
-  min-height: 210px;
-  border-radius: 14px;
-  margin-top: 15px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 25px;
-  background: linear-gradient(135deg,#38432c,#1c303a,#46365c);
-}
-.post-art strong {
-  font-size: clamp(28px, 7vw, 48px);
-  letter-spacing: -2px;
-}
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-.actions button { flex: 1; min-width: 75px; }
-textarea, input, select {
-  width: 100%;
-  background: #202326;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 13px;
-  border-radius: 12px;
-  margin: 8px 0;
-}
-.view { display: none; }
-.view.active { display: block; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 12px;
-}
-.tile {
-  background: var(--panel2);
-  min-height: 120px;
-  padding: 18px;
-  border-radius: 15px;
-  border: 1px solid var(--border);
-}
-.tile b { color: var(--lime); }
-.bottom {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 4px calc(10px + env(safe-area-inset-bottom));
-  background: #202326f5;
-  border-top: 1px solid var(--border);
-}
-.bottom button {
-  background: none;
-  border: 0;
-  color: var(--muted);
-  font-size: 11px;
-  padding: 5px;
-}
-.bottom button span {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 3px;
-}
-.bottom button.active { color: var(--lime); }
-.create-fab {
-  position: fixed;
-  right: 20px;
-  bottom: 88px;
-  z-index: 8;
-  width: 58px;
-  height: 58px;
-  border: none;
-  border-radius: 19px;
-  background: var(--lime);
-  color: #172000;
-  font-size: 31px;
-  box-shadow: 0 0 25px #a3ff1240;
-}
-.statrow { display: flex; justify-content: space-around; text-align: center; }
-.statrow strong { display: block; font-size: 20px; }
-#notice { color: var(--lime); font-size: 13px; }
-@media(min-width:700px) {
-  main { margin-top: 35px; }
-  .bottom { left: 50%; right: auto; transform: translateX(-50%); width: min(650px,95%); border: 1px solid var(--border); border-radius: 18px 18px 0 0; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#202326">
+  <title>VibeLoop — Your Vibe. Your World.</title>
+  <style>
+    :root {
+      --bg: #202326;
+      --panel: #292d30;
+      --panel2: #33383b;
+      --lime: #a3ff12;
+      --text: #f5f7f2;
+      --muted: #a3aaa5;
+      --border: #414649;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
+    }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #202326f5;
+      border-bottom: 1px solid var(--border);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { color: var(--lime); font-size: 25px; font-weight: 900; }
+    .btn, .pill {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+    .primary {
+      color: #172000 !important;
+      background: var(--lime) !important;
+      border-color: var(--lime) !important;
+      font-weight: 800;
+    }
+    main { max-width: 760px; margin: 25px auto 110px; padding: 0 16px; }
+    h1 { font-size: 29px; }
+    .muted { color: var(--muted); }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      padding: 17px;
+      margin: 17px 0;
+    }
+    .eyebrow { color: var(--lime); font-size: 12px; font-weight: 800; letter-spacing: 2px; }
+    input, textarea {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 13px;
+      border-radius: 12px;
+      margin: 8px 0;
+    }
+    .view { display: none; }
+    .view.active { display: block; }
+    .stories { display: flex; gap: 17px; overflow-x: auto; }
+    .story { min-width: 68px; text-align: center; cursor: pointer; font-size: 12px; }
+    .ring {
+      width: 62px; height: 62px; margin: 8px auto;
+      border-radius: 50%; border: 3px solid var(--lime);
+      display: grid; place-items: center; background: var(--panel2);
+      font-size: 25px;
+    }
+    .post-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .avatar {
+      display: inline-grid; place-items: center; width: 42px; height: 42px;
+      border-radius: 14px; background: var(--lime); color: #172000;
+      font-weight: 900; margin-right: 9px;
+    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .actions button { flex: 1; }
+    .post-art {
+      min-height: 210px; border-radius: 14px; margin-top: 15px;
+      display: grid; place-items: center; text-align: center; padding: 25px;
+      background: linear-gradient(135deg,#38432c,#1c303a,#46365c);
+    }
+    .post-art strong { font-size: clamp(28px,7vw,48px); }
+    .grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .tile { background: var(--panel2); padding: 18px; border-radius: 15px; border: 1px solid var(--border); }
+    .tile b { color: var(--lime); }
+    .bottom {
+      position: fixed; z-index: 10; bottom: 0; left: 0; right: 0;
+      display: flex; justify-content: space-around; padding: 10px 4px;
+      background: #202326f5; border-top: 1px solid var(--border);
+    }
+    .bottom button { background: none; border: 0; color: var(--muted); font-size: 11px; }
+    .bottom button span { display: block; font-size: 20px; }
+    .bottom button.active { color: var(--lime); }
+    #notice { color: var(--lime); white-space: pre-wrap; }
+    @media(min-width:700px) {
+      .bottom { left: 50%; right: auto; transform: translateX(-50%); width: min(650px,95%); }
+    }
+  </style>
 </head>
 <body>
 
@@ -219,95 +119,76 @@ textarea, input, select {
 </header>
 
 <main>
-  <section id="home" class="view active">
+  <!-- WELCOME / SIGNUP / LOGIN -->
+  <section id="auth" class="view active">
+    <p class="eyebrow">YOUR WORLD. YOUR PEOPLE.</p>
+    <h1>Welcome to VibeLoop 💚</h1>
+    <p class="muted">Your vibe. Your world. Connect with your people.</p>
+
+    <div class="card">
+      <button class="btn primary" onclick="setAuthMode('signup')">Create account</button>
+      <button class="btn" onclick="setAuthMode('login')">Log in</button>
+
+      <div id="signupFields">
+        <input id="authName" placeholder="Your display name">
+        <input id="authUsername" placeholder="Username (letters, numbers, underscore)">
+      </div>
+
+      <input id="authEmail" type="email" placeholder="Email address" autocomplete="email">
+      <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" autocomplete="current-password">
+
+      <button id="authSubmit" class="btn primary" onclick="submitAuth()">Create account</button>
+      <p id="authMsg" class="muted"></p>
+    </div>
+  </section>
+
+  <!-- HOME FEED -->
+  <section id="home" class="view">
     <p class="eyebrow">YOUR WORLD. YOUR PEOPLE.</p>
     <h1>Your vibe, your space.</h1>
     <p class="muted">Discover people. Share moments. Be yourself.</p>
 
     <div class="card">
-      <div class="post-head">
-        <div>
-          <h2 style="margin:0">Stories</h2>
-          <small class="muted">Little moments, your way</small>
-        </div>
-        <span style="color:var(--lime)">24h*</span>
-      </div>
-      <div class="stories" id="stories">
-        <div class="story" onclick="addStory()">
-          <div class="ring">＋</div>Your story
-        </div>
-        <div class="story" onclick="viewStory('Arjun')">
-          <div class="ring">🏔️</div>Arjun
-        </div>
-        <div class="story" onclick="viewStory('Zoya')">
-          <div class="ring">🎨</div>Zoya
-        </div>
-        <div class="story" onclick="viewStory('Kabir')">
-          <div class="ring">🎧</div>Kabir
-        </div>
-        <div class="story" onclick="viewStory('Ira')">
-          <div class="ring">🌿</div>Ira
-        </div>
+      <h2>Stories</h2>
+      <div class="stories">
+        <div class="story" onclick="addStory()"><div class="ring">＋</div>Your story</div>
+        <div class="story" onclick="viewStory('Arjun')"><div class="ring">🏔️</div>Arjun</div>
+        <div class="story" onclick="viewStory('Zoya')"><div class="ring">🎨</div>Zoya</div>
+        <div class="story" onclick="viewStory('Kabir')"><div class="ring">🎧</div>Kabir</div>
+        <div class="story" onclick="viewStory('Ira')"><div class="ring">🌿</div>Ira</div>
       </div>
     </div>
 
     <div class="card">
       <h2>Create a post</h2>
-      <textarea id="postText" rows="3" placeholder="What's your vibe today?"></textarea>
-      <button class="btn primary" onclick="createPost()">Share post ↗</button>
-      <p class="muted" style="font-size:12px">Demo posts are saved only in this browser.</p>
+      <textarea id="postText" rows="3" maxlength="2000" placeholder="What's your vibe today?"></textarea>
+      <button id="postSubmit" class="btn primary" onclick="createPost()">Share post ↗</button>
     </div>
 
     <h2>Your Feed</h2>
-    <div id="feed">
-      <article class="card">
-        <div class="post-head">
-          <div><span class="avatar">A</span><b>Arjun Mehta</b><br>
-          <small class="muted">2 hours ago</small></div>
-          <span class="muted">•••</span>
-        </div>
-        <div class="post-art"><div><strong>STAY IN<br>YOUR FLOW.</strong><p>Small steps. Big energy. 💚</p></div></div>
-        <div class="actions">
-          <button class="btn" onclick="likePost(this)">♡ Like</button>
-          <button class="btn" onclick="alert('Comments demo')">◯ Comment</button>
-          <button class="btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="post-head">
-          <div><span class="avatar">Z</span><b>Zoya Khan</b><br>
-          <small class="muted">5 hours ago</small></div>
-        </div>
-        <p>Collect moments, not expectations. ✨</p>
-        <div class="actions">
-          <button class="btn" onclick="likePost(this)">♡ Like</button>
-          <button class="btn" onclick="alert('Comments demo')">◯ Comment</button>
-          <button class="btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </article>
-    </div>
+    <div id="feed">Loading posts…</div>
   </section>
 
+  <!-- REELS -->
   <section id="reels" class="view">
     <p class="eyebrow">QUICK. CREATIVE. YOU.</p>
     <h1>Reels</h1>
-    <div class="card post-art"><div><strong>Your next<br>moment.</strong><p>Short videos belong here.</p></div></div>
-    <button class="btn primary" onclick="alert('Video upload needs backend setup')">＋ Create a reel</button>
+    <div class="card post-art"><strong>Your next moment.</strong></div>
+    <p class="muted">Video uploads need additional storage integration.</p>
   </section>
 
+  <!-- MESSAGES -->
   <section id="messages" class="view">
     <p class="eyebrow">STAY CONNECTED</p>
     <h1>Messages</h1>
-    <p class="muted">Your conversations in one place.</p>
-    <div class="card" onclick="alert('Chat demo — real messaging needs backend')"> <span class="avatar">A</span><b>Arjun</b><p class="muted">Hey! What's your vibe today?</p></div>
-    <div class="card" onclick="alert('Chat demo — real messaging needs backend')"><span class="avatar">Z</span><b>Zoya</b><p class="muted">Shared a new moment ✨</p></div>
-    <p class="muted">Private multi-user chat will need backend integration.</p>
+    <div class="card">Real private messaging needs a messages table and realtime setup.</div>
   </section>
 
+  <!-- EXPLORE -->
   <section id="explore" class="view">
     <p class="eyebrow">FIND YOUR PEOPLE</p>
     <h1>Explore</h1>
-    <input id="search" placeholder="Search people, posts and vibes…" oninput="filterTiles()">
+    <input id="search" placeholder="Search vibes…" oninput="filterTiles()">
     <div class="grid" id="tiles">
       <div class="tile"><b># Creativity</b><p>Ideas & inspiration</p></div>
       <div class="tile"><b># Gaming</b><p>Play. Share. Repeat.</p></div>
@@ -318,226 +199,293 @@ textarea, input, select {
     </div>
   </section>
 
+  <!-- PROFILE -->
   <section id="profile" class="view">
     <p class="eyebrow">YOUR CORNER OF VIBELOOP</p>
-    <div class="card" style="text-align:center">
-      <div class="avatar" style="width:76px;height:76px;font-size:28px;margin:10px auto">Y</div>
-      <h1 id="profileName">Your Name</h1>
-      <p class="muted" id="bio">Making my own vibe. 💚</p>
-      <div class="statrow">
-        <div><strong id="postCount">0</strong><span class="muted">Posts</span></div>
-        <div><strong>0</strong><span class="muted">Followers</span></div>
-        <div><strong>0</strong><span class="muted">Following</span></div>
-      </div>
-      <hr style="border-color:var(--border);margin:20px 0">
-      <input id="nameInput" placeholder="Your display name">
-      <input id="bioInput" placeholder="Write a short bio">
-      <button class="btn primary" onclick="saveProfile()">Save profile</button>
-    </div>
     <div class="card">
-      <h2>Settings</h2>
-      <label for="language">Language / भाषा</label>
-      <select id="language" onchange="languageNotice()">
-        <option>English</option>
-        <option>हिन्दी</option>
-        <option>বাংলা</option>
-        <option>தமிழ்</option>
-        <option>తెలుగు</option>
-      </select>
-      <p id="languageMsg" class="muted">Language selector preview. Full translation is not connected yet.</p>
+      <div id="profileAvatar" class="avatar">Y</div>
+      <h1 id="profileName">Your Name</h1>
+      <p id="bio" class="muted">Making my own vibe. 💚</p>
+      <input id="nameInput" placeholder="Display name">
+      <input id="usernameInput" placeholder="Username">
+      <input id="bioInput" placeholder="Short bio">
+      <button class="btn primary" onclick="saveProfile()">Save profile</button>
+      <button class="btn" onclick="signOut()">Log out</button>
+      <p>Posts: <strong id="postCount">0</strong></p>
     </div>
   </section>
 
-  <p id="notice"></p>
+  <p id="notice" role="status"></p>
 </main>
 
-<button class="create-fab" aria-label="Create post" onclick="showView('home');document.getElementById('postText').focus()">＋</button>
-
 <nav class="bottom">
-  <button class="active" data-view="home" onclick="showView('home',this)"><span>⌂</span>Home</button>
-  <button data-view="reels" onclick="showView('reels',this)"><span>▷</span>Reels</button>
-  <button data-view="messages" onclick="showView('messages',this)"><span>✉</span>Messages</button>
-  <button data-view="explore" onclick="showView('explore',this)"><span>⌕</span>Explore</button>
-  <button data-view="profile" onclick="showView('profile',this)"><span>◉</span>Profile</button>
+  <button data-view="home" onclick="showView('home')"><span>⌂</span>Home</button>
+  <button data-view="reels" onclick="showView('reels')"><span>▷</span>Reels</button>
+  <button data-view="messages" onclick="showView('messages')"><span>✉</span>Messages</button>
+  <button data-view="explore" onclick="showView('explore')"><span>⌕</span>Explore</button>
+  <button data-view="profile" onclick="showView('profile')"><span>◉</span>Profile</button>
 </nav>
 
-<script>
-function showView(id, button) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.bottom button').forEach(b => b.classList.remove('active'));
-  const navButton = document.querySelector('[data-view="' + id + '"]');
-  if (navButton) navButton.classList.add('active');
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
-function createPost() {
-  const input = document.getElementById('postText');
-  const text = input.value.trim();
-  if (!text) { alert('Write something first!'); return; }
-  const card = document.createElement('article');
-  card.className = 'card';
-  const p = document.createElement('p');
-  p.textContent = text;
-  const note = document.createElement('small');
-  note.className = 'muted';
-  note.textContent = 'Just now · Local demo post';
-  const actions = document.createElement('div');
-  actions.className = 'actions';
-  const like = document.createElement('button');
-  like.className = 'btn';
-  like.textContent = '♡ Like';
-  like.onclick = () => likePost(like);
-  actions.append(like);
-  card.append(note, p, actions);
-  document.getElementById('feed').prepend(card);
-  input.value = '';
-  document.getElementById('postCount').textContent =
-    Number(document.getElementById('postCount').textContent) + 1;
-}
-function likePost(button) {
-  const liked = button.dataset.liked === 'true';
-  button.dataset.liked = String(!liked);
-  button.textContent = liked ? '♡ Like' : '♥ Liked';
-  button.style.color = liked ? '' : 'var(--lime)';
-}
-function sharePost() {
-  if (navigator.share) navigator.share({title:'VibeLoop',text:'Check out VibeLoop!'});
-  else alert('VibeLoop — Your Vibe. Your World.');
-}
-function viewStory(name) {
-  alert(name + "'s sample story. Real stories need upload and expiry support.");
-}
-function addStory() {
-  const story = prompt('Write a short story update:');
-  if (!story || !story.trim()) return;
-  const item = document.createElement('div');
-  item.className = 'story';
-  const ring = document.createElement('div');
-  ring.className = 'ring';
-  ring.textContent = '💚';
-  const label = document.createElement('div');
-  label.textContent = 'Your story';
-  item.append(ring, label);
-  item.onclick = () => alert(story);
-  document.getElementById('stories').append(item);
-}
-function saveProfile() {
-  const name = document.getElementById('nameInput').value.trim();
-  const bio = document.getElementById('bioInput').value.trim();
-  if (name) document.getElementById('profileName').textContent = name;
-  if (bio) document.getElementById('bio').textContent = bio;
-  alert('Profile updated in this demo.');
-}
-function filterTiles() {
-  const q = document.getElementById('search').value.toLowerCase();
-  document.querySelectorAll('#tiles .tile').forEach(tile => {
-    tile.style.display = tile.textContent.toLowerCase().includes(q) ? '' : 'none';
-  });
-}
-function languageNotice() {
-  document.getElementById('languageMsg').textContent =
-    'Selected: ' + document.getElementById('language').value +
-    '. Full app translation will be added next.';
-}
-</script>
-</body>
-  </html>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const SUPABASE_URL = "https://firnejhnisoqdoydpoqf.supabase.co";
+const SUPABASE_URL = "https://firnejhnisoqdoydpoqf.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_NEW_PUBLISHABLE_KEY_HERE";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
+let currentUser = null;
+let authMode = "signup";
+let profileRow = null;
+let postsCache = [];
 
-  const SUPABASE_PUBLISHABLE_KEY = sb_publishable_4f55dUSbukM_jWS9go-Dpg_yig-ggAG
+function notice(message, error=false) {
+  const el = document.getElementById("notice");
+  el.textContent = message;
+  el.style.color = error ? "#ff8c8c" : "var(--lime)";
+}
 
-  const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+function showView(id) {
+  if (!currentUser && id !== "auth") {
+    setAuthMode("login");
+    id = "auth";
+  }
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".bottom button").forEach(b => b.classList.toggle("active", b.dataset.view === id));
+  if (id === "home" && currentUser) loadPosts();
+  if (id === "profile" && currentUser) loadProfile();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-  console.log("VibeLoop Supabase client initialized");
-</script>
-</body>
-</html>
+function setAuthMode(mode) {
+  authMode = mode;
+  const signup = mode === "signup";
+  document.getElementById("signupFields").style.display = signup ? "" : "none";
+  document.getElementById("authSubmit").textContent = signup ? "Create account" : "Log in";
+  document.getElementById("authMsg").textContent = "";
+}
 
-<section id="auth">
-  <h1>Join VibeLoop 💚</h1>
-
-  <input id="authName" placeholder="Your name">
-  <input id="authUsername" placeholder="Username">
-  <input id="authEmail" type="email" placeholder="Email">
-  <input id="authPassword" type="password"
-         placeholder="Password (minimum 6 characters)">
-
-  <button onclick="submitSignup()">Create account</button>
-  <button onclick="submitLogin()">Log in</button>
-  <button onclick="submitLogout()">Log out</button>
-
-  <p id="authMsg"></p>
-</section>
-
-async function submitSignup() {
+async function submitAuth() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
   const name = document.getElementById("authName").value.trim();
   const username = document.getElementById("authUsername").value.trim().toLowerCase();
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
   const msg = document.getElementById("authMsg");
 
-  if (!name || !email || password.length < 6) {
-    msg.textContent = "Name, email aur 6+ character password bharo.";
+  if (!email || password.length < 6) {
+    msg.textContent = "Email bharo aur password kam se kam 6 characters ka rakho.";
+    return;
+  }
+  if (authMode === "signup" && !name) {
+    msg.textContent = "Apna display name bharo.";
+    return;
+  }
+  if (authMode === "signup" && !/^[a-z0-9_]{3,30}$/.test(username)) {
+    msg.textContent = "Username 3–30 characters ka ho: lowercase letters, numbers ya underscore.";
     return;
   }
 
-  if (!/^[a-z0-9_]{3,30}$/.test(username)) {
-    msg.textContent = "Username 3–30 characters ka ho: letters, numbers ya underscore.";
-    return;
-  }
-
-  const { data, error } = await db.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name: name,
-        username: username
-      }
+  try {
+    let result;
+    if (authMode === "signup") {
+      result = await db.auth.signUp({
+        email, password,
+        options: { data: { full_name: name, username } }
+      });
+    } else {
+      result = await db.auth.signInWithPassword({email,password});
     }
-  });
 
-  if (error) {
-    msg.textContent = error.message;
+    if (result.error) throw result.error;
+
+    if (authMode === "signup" && !result.data.session) {
+      msg.textContent = "Signup successful! Email check karke account confirm karo, phir login karo.";
+      return;
+    }
+
+    currentUser = result.data.user;
+    await ensureProfile(name, username);
+    await loadProfile();
+    await loadPosts();
+    showView("home");
+    msg.textContent = "Welcome to VibeLoop!";
+  } catch (err) {
+    msg.textContent = err.message || "Kuch galat ho gaya. Dobara try karo.";
+  }
+}
+
+async function ensureProfile(name="", username="") {
+  if (!currentUser) return;
+
+  const {data: existing, error: readError} = await db.from("profiles")
+    .select("id").eq("id", currentUser.id).maybeSingle();
+  if (readError) throw readError;
+  if (existing) return;
+
+  const emailName = (currentUser.email || "user").split("@")[0]
+    .toLowerCase().replace(/[^a-z0-9_]/g, "_").slice(0, 30);
+
+  const {error} = await db.from("profiles").insert({
+    id: currentUser.id,
+    full_name: name || currentUser.user_metadata?.full_name || emailName,
+    username: username || currentUser.user_metadata?.username || "user_" + currentUser.id.slice(0,8),
+    bio: "Making my own vibe. 💚"
+  });
+  if (error) throw error;
+}
+
+async function loadProfile() {
+  if (!currentUser) return;
+  const {data, error} = await db.from("profiles")
+    .select("id,username,full_name,avatar_url,bio")
+    .eq("id",currentUser.id).maybeSingle();
+  if (error) { notice(error.message,true); return; }
+  profileRow = data;
+  if (!data) return;
+
+  document.getElementById("profileName").textContent = data.full_name || "Your Name";
+  document.getElementById("bio").textContent = data.bio || "";
+  document.getElementById("profileAvatar").textContent = (data.full_name || "Y")[0].toUpperCase();
+  document.getElementById("nameInput").value = data.full_name || "";
+  document.getElementById("usernameInput").value = data.username || "";
+  document.getElementById("bioInput").value = data.bio || "";
+}
+
+async function saveProfile() {
+  if (!currentUser) { showView("auth"); return; }
+  const full_name = document.getElementById("nameInput").value.trim();
+  const username = document.getElementById("usernameInput").value.trim().toLowerCase();
+  const bio = document.getElementById("bioInput").value.trim();
+
+  if (!full_name || !/^[a-z0-9_]{3,30}$/.test(username)) {
+    notice("Display name aur valid username bharo.",true);
     return;
   }
 
-  if (data.session) {
-    msg.textContent = "Account created! Welcome to VibeLoop.";
+  const {data,error} = await db.from("profiles").upsert({
+    id:currentUser.id, full_name, username, bio
+  },{onConflict:"id"}).select().single();
+
+  if (error) { notice(error.message,true); return; }
+  profileRow = data;
+  await loadProfile();
+  notice("Profile saved!");
+}
+
+async function loadPosts() {
+  const feed = document.getElementById("feed");
+  try {
+    const {data,error} = await db.from("posts")
+      .select("id,created_at,user_id,content")
+      .order("created_at",{ascending:false}).limit(50);
+    if (error) throw error;
+    postsCache = data || [];
+    renderFeed();
+  } catch (err) {
+    feed.textContent = "Posts load nahi hue: " + err.message;
+  }
+}
+
+async function createPost() {
+  if (!currentUser) { showView("auth"); return; }
+  const input = document.getElementById("postText");
+  const content = input.value.trim();
+  if (!content) { notice("Pehle post likho.",true); return; }
+
+  const {data,error} = await db.from("posts")
+    .insert({user_id:currentUser.id,content})
+    .select("id,created_at,user_id,content").single();
+
+  if (error) { notice(error.message,true); return; }
+  postsCache.unshift(data);
+  input.value = "";
+  renderFeed();
+  notice("Post Supabase mein save ho gayi!");
+}
+
+function renderFeed() {
+  const feed = document.getElementById("feed");
+  feed.replaceChildren();
+  document.getElementById("postCount").textContent =
+    postsCache.filter(p => currentUser && p.user_id === currentUser.id).length;
+
+  if (!postsCache.length) {
+    feed.textContent = "Abhi koi post nahi hai. Pehli post tum share karo!";
+    return;
+  }
+
+  postsCache.forEach(post => {
+    const card = document.createElement("article");
+    card.className = "card";
+    const head = document.createElement("div");
+    head.className = "post-head";
+    const name = document.createElement("b");
+    name.textContent = post.user_id === currentUser?.id
+      ? (profileRow?.full_name || "You") : "VibeLoop member";
+    const date = document.createElement("small");
+    date.className = "muted";
+    date.textContent = new Date(post.created_at).toLocaleString();
+    head.append(name,date);
+
+    const content = document.createElement("p");
+    content.style.whiteSpace = "pre-wrap";
+    content.textContent = post.content;
+    card.append(head,content);
+
+    if (currentUser && post.user_id === currentUser.id) {
+      const del = document.createElement("button");
+      del.className = "btn";
+      del.textContent = "Delete post";
+      del.onclick = async () => {
+        if (!confirm("Post delete karni hai?")) return;
+        const {error} = await db.from("posts").delete()
+          .eq("id",post.id).eq("user_id",currentUser.id);
+        if (error) { notice(error.message,true); return; }
+        postsCache = postsCache.filter(p => p.id !== post.id);
+        renderFeed();
+      };
+      card.append(del);
+    }
+    feed.append(card);
+  });
+}
+
+async function signOut() {
+  const {error} = await db.auth.signOut();
+  if (error) { notice(error.message,true); return; }
+  currentUser = null;
+  profileRow = null;
+  setAuthMode("login");
+  showView("auth");
+}
+
+function addStory() {
+  const story = prompt("Apni story likho:");
+  if (story && story.trim()) alert("Demo story: " + story);
+}
+function viewStory(name) { alert(name + " ki sample story."); }
+function filterTiles() {
+  const q = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll("#tiles .tile").forEach(tile => {
+    tile.style.display = tile.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+(async function init() {
+  if (SUPABASE_PUBLISHABLE_KEY === "PASTE_YOUR_NEW_PUBLISHABLE_KEY_HERE") {
+    notice("Pehle code mein Supabase publishable key paste karo.",true);
+  }
+  const {data:{session}} = await db.auth.getSession();
+  currentUser = session?.user || null;
+
+  if (currentUser) {
+    await ensureProfile();
+    await loadProfile();
+    await loadPosts();
+    showView("home");
   } else {
-    msg.textContent =
-      "Signup successful! Email check karo aur account confirm karke login karo.";
+    showView("auth");
   }
-}
-async function submitLogin() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const msg = document.getElementById("authMsg");
-
-  const { data, error } = await db.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) {
-    msg.textContent = error.message;
-    return;
-  }
-
-  msg.textContent = "Login successful! Welcome back.";
-  console.log("Logged-in user ID:", data.user.id);
-}
-
-async function submitLogout() {
-  const { error } = await db.auth.signOut();
-
-  document.getElementById("authMsg").textContent =
-    error ? error.message : "You have logged out.";
-}
-    
+})();
+</script>
+</body>
+          </html>
