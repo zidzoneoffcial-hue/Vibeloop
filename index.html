@@ -458,3 +458,86 @@ function languageNotice() {
 </script>
 </body>
 </html>
+
+<section id="auth">
+  <h1>Join VibeLoop 💚</h1>
+
+  <input id="authName" placeholder="Your name">
+  <input id="authUsername" placeholder="Username">
+  <input id="authEmail" type="email" placeholder="Email">
+  <input id="authPassword" type="password"
+         placeholder="Password (minimum 6 characters)">
+
+  <button onclick="submitSignup()">Create account</button>
+  <button onclick="submitLogin()">Log in</button>
+  <button onclick="submitLogout()">Log out</button>
+
+  <p id="authMsg"></p>
+</section>
+
+async function submitSignup() {
+  const name = document.getElementById("authName").value.trim();
+  const username = document.getElementById("authUsername").value.trim().toLowerCase();
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const msg = document.getElementById("authMsg");
+
+  if (!name || !email || password.length < 6) {
+    msg.textContent = "Name, email aur 6+ character password bharo.";
+    return;
+  }
+
+  if (!/^[a-z0-9_]{3,30}$/.test(username)) {
+    msg.textContent = "Username 3–30 characters ka ho: letters, numbers ya underscore.";
+    return;
+  }
+
+  const { data, error } = await db.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: name,
+        username: username
+      }
+    }
+  });
+
+  if (error) {
+    msg.textContent = error.message;
+    return;
+  }
+
+  if (data.session) {
+    msg.textContent = "Account created! Welcome to VibeLoop.";
+  } else {
+    msg.textContent =
+      "Signup successful! Email check karo aur account confirm karke login karo.";
+  }
+}
+async function submitLogin() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const msg = document.getElementById("authMsg");
+
+  const { data, error } = await db.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    msg.textContent = error.message;
+    return;
+  }
+
+  msg.textContent = "Login successful! Welcome back.";
+  console.log("Logged-in user ID:", data.user.id);
+}
+
+async function submitLogout() {
+  const { error } = await db.auth.signOut();
+
+  document.getElementById("authMsg").textContent =
+    error ? error.message : "You have logged out.";
+}
+    
